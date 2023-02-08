@@ -35,9 +35,11 @@ mvn clean compile assembly:single
 Due: **Mon, Feb 13 2023** @1 AM
 
 - Displays a seating chart with occupied and non-occupied seats
-- Initial student list has at least 10 students
-- Information regarding student's First/Last name, ID and date of birth
+- Has at least 10 students by default
 - Student information can be viewed
+  - First/Last name
+  - ID
+  - date of birth
 - Students can be added/removed from the chart
 - You can sort the chart in row-major alphabetical order by last name
 - You can sort the chart in column major alphabetical order by last name
