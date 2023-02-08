@@ -61,6 +61,8 @@ public final class App extends BaseApp {
     StudentLoader.load(this, students);
     println(students);
 
+    println(seats);
+
     // SETUP CLASSES
     header.setup();
     intro.setup();

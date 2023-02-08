@@ -14,6 +14,11 @@ public class SeatViewer extends Obj {
   @Override
   protected void _update() {}
 
+  @Override
+  public String toString() {
+    return "" + r + "" + c + " " + student;
+  }
+
   public SeatViewer(App app, int r, int c, Student student) {
     super(app);
     this.r = r;

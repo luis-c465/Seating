@@ -2,13 +2,24 @@ package luisc.seating;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Seats extends LinkedList<LinkedList<SeatViewer>> {
 
+  private static final int COLS = 10;
+
+  private static final int ROWS = 3;
+
   public static final Comparator<SeatViewer> nameSorter = new Comparator<SeatViewer>() {
     public int compare(SeatViewer a, SeatViewer b) {
+      if (a == null) {
+        return -1;
+      } else if (b == null) {
+        return 1;
+      }
+
       int first = a.student.firstName.compareTo(b.student.firstName);
 
       if (first != 0) {
@@ -21,6 +32,12 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
 
   public static final Comparator<SeatViewer> idSorter = new Comparator<SeatViewer>() {
     public int compare(SeatViewer a, SeatViewer b) {
+      if (a == null) {
+        return -1;
+      } else if (b == null) {
+        return 1;
+      }
+
       return Integer.compare(a.student.id_i, b.student.id_i);
     }
   };
@@ -70,5 +87,29 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
 
   public Seats() {
     super();
+    // Add 3 rows to the program
+    for (int r = 0; r < ROWS; r++) {
+      LinkedList<SeatViewer> seats = new LinkedList<SeatViewer>();
+      for (int c = 0; c < COLS; c++) {
+        seats.add(null);
+      }
+
+      this.add(seats);
+    }
+  }
+
+  @Override
+  public String toString() {
+    Iterator<LinkedList<SeatViewer>> it = iterator();
+    if (!it.hasNext()) return "[]";
+
+    StringBuilder sb = new StringBuilder();
+    sb.append('[');
+    for (;;) {
+      LinkedList<SeatViewer> e = it.next();
+      sb.append(e);
+      if (!it.hasNext()) return sb.append(']').toString();
+      sb.append(',').append('\n');
+    }
   }
 }
