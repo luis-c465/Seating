@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SortableList extends LinkedList<LinkedList<SeatViewer>> {
+public class Seats extends LinkedList<LinkedList<SeatViewer>> {
 
   public static final Comparator<SeatViewer> nameSorter = new Comparator<SeatViewer>() {
     public int compare(SeatViewer a, SeatViewer b) {
@@ -66,5 +66,9 @@ public class SortableList extends LinkedList<LinkedList<SeatViewer>> {
         }
       }
     ); // End of function call sort().
+  }
+
+  public Seats() {
+    super();
   }
 }

@@ -1,6 +1,7 @@
 package luisc.seating;
 
 import controlP5.ControlP5;
+import java.util.LinkedList;
 import luisc.lib.BaseApp;
 import luisc.lib.TransitionIn;
 import luisc.lib.TransitionOut;
@@ -26,6 +27,9 @@ public final class App extends BaseApp {
 
   public long numDead = 0;
   public long numTicks = 0;
+
+  public Seats seats = new Seats();
+  public LinkedList<Student> students = new LinkedList<Student>();
 
   // Should be calculated at runtime
 
@@ -54,6 +58,8 @@ public final class App extends BaseApp {
     cp5 = new ControlP5(this);
 
     // Initialize box2d physics and create the world
+    StudentLoader.load(this, students);
+    println(students);
 
     // SETUP CLASSES
     header.setup();
