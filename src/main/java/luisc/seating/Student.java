@@ -4,19 +4,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
+import java.util.Random;
 import processing.core.PApplet;
-import processing.core.PImage;
 
 public class Student {
 
   public static final DateTimeFormatter dateParser = getDateInputFormatter();
+  public static final Random rand = new Random();
 
   public String firstName;
   public String lastName;
   public String id;
   public int id_i;
   public LocalDate dob;
-  public PImage img;
 
   @Override
   public String toString() {
@@ -25,7 +25,7 @@ public class Student {
     );
   }
 
-  public Student(PApplet p, String name, String id, String dob, String imgUrl) {
+  public Student(PApplet p, String name, String id, String dob) {
     String[] nameSplit = name.split(" ");
 
     this.firstName = nameSplit[0];
@@ -33,12 +33,34 @@ public class Student {
     this.id = id;
     this.id_i = Integer.parseInt(id);
     this.dob = LocalDate.from(dateParser.parse(dob));
-
-    this.img = p.loadImage("students/" + imgUrl);
+    // this.img = p.loadImage("students/" + imgUrl);
   }
 
-  public Student(PApplet p, String... strings) {
-    this(p, strings[0], strings[1], strings[2], strings[3]);
+  public Student(PApplet p, String name, String id, LocalDate dob) {
+    String[] nameSplit = name.split(" ");
+
+    this.firstName = nameSplit[0];
+    this.lastName = nameSplit[1];
+    this.id = id;
+    this.id_i = Integer.parseInt(id);
+    this.dob = dob;
+    // this.img = p.loadImage("students/" + imgUrl);
+  }
+
+  public Student(PApplet p, String name) {
+    this(p, name, randId(), randDate());
+  }
+
+  public static final String randId() {
+    return "" + rand.nextInt(999_999);
+  }
+
+  public static final LocalDate randDate() {
+    int minDay = (int) LocalDate.of(2004, 1, 1).toEpochDay();
+    int maxDay = (int) LocalDate.of(2009, 1, 1).toEpochDay();
+    long randomDay = minDay + rand.nextInt(maxDay - minDay);
+
+    return LocalDate.ofEpochDay(randomDay);
   }
 
   public static DateTimeFormatter getDateInputFormatter() {
