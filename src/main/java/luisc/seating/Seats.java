@@ -12,6 +12,18 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
 
   private static final int ROWS = 3;
 
+  public static final Comparator<SeatViewer> defaultSorter = new Comparator<SeatViewer>() {
+    public int compare(SeatViewer a, SeatViewer b) {
+      if (a == null) {
+        return -1;
+      } else if (b == null) {
+        return 1;
+      }
+
+      return Integer.compare(a.c, b.c);
+    }
+  };
+
   public static final Comparator<SeatViewer> nameSorter = new Comparator<SeatViewer>() {
     public int compare(SeatViewer a, SeatViewer b) {
       if (a == null) {
@@ -41,6 +53,12 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
       return Integer.compare(a.student.id_i, b.student.id_i);
     }
   };
+
+  public void rowsSortByDefault() {
+    for (List<SeatViewer> l : this) {
+      Collections.sort(l, defaultSorter);
+    }
+  }
 
   public void rowsSortByName() {
     for (List<SeatViewer> l : this) {
