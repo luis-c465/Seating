@@ -25,6 +25,13 @@ public class Student {
     );
   }
 
+  /**
+   * @returns String containing the students first, last name, and id
+   */
+  public String toShortString() {
+    return firstName + " " + lastName + " #" + id;
+  }
+
   public Student(PApplet p, String name, String id, String dob) {
     String[] nameSplit = name.split(" ");
 
@@ -52,7 +59,7 @@ public class Student {
   }
 
   public static final String randId() {
-    return "" + rand.nextInt(999_999);
+    return "0" + rand.nextInt(999_999);
   }
 
   public static final LocalDate randDate() {

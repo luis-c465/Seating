@@ -9,7 +9,10 @@ import luisc.lib.Obj;
  */
 public class Sidebar extends Obj {
 
-  public boolean showingStudents = false;
+  public boolean showingStudents = true;
+  public Student selectedStudent = null;
+
+  public StudentSelector studentSelector;
 
   // Field constants
   private static final int safe = 20;
@@ -27,11 +30,29 @@ public class Sidebar extends Obj {
 
   @Override
   protected void _update() {
-    // Update the fields
+    if (showingStudents) {
+      showStudents();
+    } else {
+      showSeatViewer();
+    }
+  }
+
+  /**
+   * Shows information about the currently selected seat
+   */
+  private void showSeatViewer() {}
+
+  /**
+   * Shows a list of students that can be selected
+   */
+  private void showStudents() {
+    studentSelector.update();
   }
 
   @Override
-  protected void _setup() {}
+  protected void _setup() {
+    studentSelector = new StudentSelector(m);
+  }
 
   protected void showBackground() {
     push();

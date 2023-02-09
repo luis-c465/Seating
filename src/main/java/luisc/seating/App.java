@@ -43,6 +43,7 @@ public final class App extends BaseApp {
   public Header header = new Header(this);
   public StartUp startUp = new StartUp(this);
   public Intro intro = new Intro(this);
+  public Sidebar sidebar = new Sidebar(this);
 
   // Transition classes
   public TransitionIn transIn = new TransitionIn(this);
@@ -67,6 +68,8 @@ public final class App extends BaseApp {
     header.setup();
     intro.setup();
     startUp.setup();
+
+    sidebar.setup();
     // Setup game classes
   }
 
@@ -76,6 +79,7 @@ public final class App extends BaseApp {
     fill(255);
 
     seats.update();
+    sidebar.update();
     // startUp.update();
     // if (!startUp.done) {
     //   return;

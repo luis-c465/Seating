@@ -16,6 +16,7 @@ public class Assets {
   public static final int success = 0xff4ade80;
   public static final int error = 0xfff87171;
   public static final int gray = 0xff6b7280;
+  public static final int selected = 0xff22d3ee;
 
   public PApplet p;
   public Class<? extends Assets> _class;
