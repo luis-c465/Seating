@@ -7,8 +7,8 @@ import luisc.lib.Clickable;
  */
 public class SeatViewer extends Clickable {
 
-  public static final int margin_top = 500;
-  public static final int margin_left = 10;
+  public static final int margin_top = 450;
+  public static final int margin_left = 65;
   public static final int gap = 10;
   public static final int padding = 3;
   public static final int doublePadding = padding * 2;
