@@ -8,8 +8,10 @@ import luisc.lib.Clickable;
 public class SeatViewer extends Clickable {
 
   public static final int margin_top = 500;
-  public static final int margin_left = 25;
-  public static final int gap = 20;
+  public static final int margin_left = 10;
+  public static final int gap = 10;
+  public static final int padding = 3;
+  public static final int doublePadding = padding * 2;
 
   public Student student;
   public int row;
@@ -17,8 +19,8 @@ public class SeatViewer extends Clickable {
 
   @Override
   protected void _setup() {
-    w = 100;
-    h = 100;
+    w = 110;
+    h = 110;
 
     x = margin_left + (w + gap) * col;
     y = margin_top + (h + gap) * row;
@@ -33,8 +35,36 @@ public class SeatViewer extends Clickable {
 
     p.fill(255);
     if (student != null) {
-      p.text(student.toString(), x, y);
+      p.fill(0);
+      p.textSize(13);
+      p.text(
+        student.toDisplayString(),
+        x + padding,
+        y + padding,
+        w - doublePadding,
+        h - doublePadding
+      );
     }
+  }
+
+  @Override
+  protected void onClick() {
+    // If there is no selected student or the sidebars student is already seated do not process the click
+    if (
+      m.sidebar.selectedStudent == null ||
+      m.sidebar.selectedStudent.alreadySeated
+    ) {
+      return;
+    }
+
+    // Add the student to this seat
+    this.student = m.sidebar.selectedStudent;
+
+    // Make the student already seated
+    this.student.alreadySeated = true;
+
+    // Reset the sidebars selected student
+    m.sidebar.selectedStudent = null;
   }
 
   @Override
@@ -48,7 +78,7 @@ public class SeatViewer extends Clickable {
     this.col = c;
     this.student = student;
 
-    _setup();
+    setup();
   }
 
   public SeatViewer(App app, int r, int c) {
@@ -56,7 +86,7 @@ public class SeatViewer extends Clickable {
     this.row = r;
     this.col = c;
 
-    _setup();
+    setup();
   }
 
   public SeatViewer(App app) {

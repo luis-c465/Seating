@@ -17,11 +17,24 @@ public class Student {
   public String id;
   public int id_i;
   public LocalDate dob;
+  public boolean alreadySeated;
 
   @Override
   public String toString() {
     return (
       firstName + " " + lastName + " #" + id + " dob: " + dateParser.format(dob)
+    );
+  }
+
+  public String toDisplayString() {
+    return (
+      firstName +
+      " " +
+      lastName +
+      " #" +
+      id +
+      "     dob: " +
+      dateParser.format(dob)
     );
   }
 

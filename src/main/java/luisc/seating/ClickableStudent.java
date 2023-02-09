@@ -25,7 +25,7 @@ public class ClickableStudent extends Clickable {
 
   @Override
   protected void _update() {
-    if (alreadySeated) {
+    if (student.alreadySeated) {
       p.fill(a.gray);
     } else if (m.sidebar.selectedStudent == this.student) {
       p.fill(a.selected);
