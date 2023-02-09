@@ -12,6 +12,8 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
 
   public static final int ROWS = 5;
 
+  public boolean sorted = false;
+
   public static final Comparator<SeatViewer> nullSorter = new Comparator<SeatViewer>() {
     public int compare(SeatViewer a, SeatViewer b) {
       if (a == null) {
@@ -72,6 +74,8 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
     for (List<SeatViewer> l : this) {
       Collections.sort(l, defaultSorter);
     }
+
+    sorted = true;
   }
 
   public void rowsSortByName() {
@@ -80,15 +84,15 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
       Collections.sort(ref, nameSorter);
       this.set(i, ref);
     }
-    // for (List<SeatViewer> l : this) {
-    //   Collections.sort(l, nameSorter);
-    // }
+
+    sorted = true;
   }
 
   public void rowsSortById() {
     for (List<SeatViewer> l : this) {
       Collections.sort(l, idSorter);
     }
+    sorted = true;
   }
 
   public void colsSortByName() {
@@ -96,6 +100,7 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
     for (int c = 0; c < cols; c++) {
       sortbyColumn(c, nameSorter);
     }
+    sorted = true;
   }
 
   public void colsSortById() {
@@ -103,13 +108,22 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
     for (int c = 0; c < cols; c++) {
       sortbyColumn(c, idSorter);
     }
+    sorted = true;
   }
 
-  public void colsSortByNormal() {
+  public void colsSortByDefault() {
     int cols = this.get(0).size();
     for (int c = 0; c < cols; c++) {
       sortbyColumn(c, defaultSorter);
     }
+    sorted = true;
+  }
+
+  public void sortByNormal() {
+    rowsSortByDefault();
+    colsSortByDefault();
+
+    sorted = false;
   }
 
   public void sortbyColumn(int col, Comparator<SeatViewer> c) {

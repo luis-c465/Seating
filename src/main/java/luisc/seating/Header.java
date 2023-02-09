@@ -25,21 +25,21 @@ public class Header extends Obj {
 
   public RowsAlphabetical rowsAlphabetical;
   public RowsId rowsId;
-  public RowsDefault rowsDefault;
 
   public ColsAlphabetical colsAlphabetical;
   public ColsId colsId;
-  public ColsDefault colsDefault;
+
+  public DefaultSeat defaultSeat;
 
   @Override
   protected void _setup() {
     rowsAlphabetical = new RowsAlphabetical(m);
     rowsId = new RowsId(m);
-    rowsDefault = new RowsDefault(m);
 
     colsAlphabetical = new ColsAlphabetical(m);
     colsId = new ColsId(m);
-    colsDefault = new ColsDefault(m);
+
+    defaultSeat = new DefaultSeat(m);
   }
 
   @Override
@@ -54,11 +54,11 @@ public class Header extends Obj {
 
     rowsAlphabetical.update();
     rowsId.update();
-    rowsDefault.update();
 
     colsAlphabetical.update();
     colsId.update();
-    colsDefault.update();
+
+    defaultSeat.update();
   }
 
   public class RowsAlphabetical extends Btn {
@@ -184,10 +184,32 @@ public class Header extends Obj {
 
     @Override
     protected void onClick() {
-      m.seats.colsSortByNormal();
+      m.seats.colsSortByDefault();
     }
 
     public ColsDefault(App a) {
+      super(a);
+      setup();
+    }
+  }
+
+  public class DefaultSeat extends Btn {
+
+    @Override
+    protected void _setup() {
+      x = x3;
+      y = (bts_begin_y_2 + bts_begin_y) / 2;
+
+      txt = "Sort by seat";
+      icon = p.loadShape("sort-ascending-2.svg");
+    }
+
+    @Override
+    protected void onClick() {
+      m.seats.sortByNormal();
+    }
+
+    public DefaultSeat(App a) {
       super(a);
       setup();
     }

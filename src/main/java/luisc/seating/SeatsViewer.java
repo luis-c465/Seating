@@ -24,6 +24,10 @@ public class SeatsViewer extends Obj {
   }
 
   private void showRowsAndCols() {
+    if (m.seats.sorted) {
+      p.fill(a.gray, 150);
+    }
+
     // Show Rows
     p.textSize(60);
     p.textAlign(c.CENTER);
