@@ -20,7 +20,13 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
         return 1;
       }
 
-      return Integer.compare(a.c, b.c);
+      if (a.student == null) {
+        return -1;
+      } else if (b.student == null) {
+        return 1;
+      }
+
+      return Integer.compare(a.col, b.col);
     }
   };
 
@@ -103,13 +109,13 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
     ); // End of function call sort().
   }
 
-  public Seats() {
+  public Seats(App p) {
     super();
     // Add 3 rows to the program
     for (int r = 0; r < ROWS; r++) {
       LinkedList<SeatViewer> seats = new LinkedList<SeatViewer>();
       for (int c = 0; c < COLS; c++) {
-        seats.add(null);
+        seats.add(new SeatViewer(p, r, c));
       }
 
       this.add(seats);

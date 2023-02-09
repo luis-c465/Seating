@@ -28,7 +28,7 @@ public final class App extends BaseApp {
   public long numDead = 0;
   public long numTicks = 0;
 
-  public Seats seats = new Seats();
+  public Seats seats = new Seats(this);
   public LinkedList<Student> students = new LinkedList<Student>();
 
   // Should be calculated at runtime
