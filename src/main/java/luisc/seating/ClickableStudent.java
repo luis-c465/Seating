@@ -14,6 +14,7 @@ public class ClickableStudent extends Clickable {
   public int row;
   public int col;
 
+  public static final int radius = 5;
   public static final int margin_top = 75;
   public static final int margin_left = 740;
   public static final int gap = 10;
@@ -33,7 +34,7 @@ public class ClickableStudent extends Clickable {
     }
 
     p.rectMode(c.CENTER);
-    p.rect(x, y, w, h);
+    p.rect(x, y, w, h, radius);
 
     p.fill(255);
     p.textMode(c.CENTER);
@@ -42,9 +43,9 @@ public class ClickableStudent extends Clickable {
     p.text(
       student.toShortString(),
       x + padding,
-      y + padding,
-      w - padding,
-      h - padding
+      y + padding / 2,
+      w - padding * 2,
+      h - padding * 2
     );
   }
 
