@@ -8,7 +8,7 @@ public abstract class Btn extends Clickable {
   protected final int btn_safe = 10;
 
   protected String txt = "Click me!";
-  protected int txt_size = 20;
+  protected int txt_size = 15;
   protected int c = 0xfffac83c;
   protected int txt_c = 0xffffffff;
   protected int radius = 25;
@@ -21,6 +21,8 @@ public abstract class Btn extends Clickable {
   // ! Calculated in setup
   protected int icon_x;
   protected int icon_y;
+  protected int txt_x;
+  protected int txt_y;
 
   protected int icon_y_mod = 0;
 
@@ -33,6 +35,7 @@ public abstract class Btn extends Clickable {
   protected void postSetup() {
     super.postSetup();
     setupIcon();
+    setupText();
   }
 
   /**
@@ -51,19 +54,24 @@ public abstract class Btn extends Clickable {
     p.rect(x, y, w, h, radius, radius, radius, radius);
 
     // Draw text
-    p.textAlign(p.CENTER, p.CENTER);
+    p.textAlign(p.LEFT, p.CENTER);
     p.fill(txt_c);
     p.textSize(txt_size);
-    p.text(txt, x + txt_space, y - 3);
+    p.text(txt, txt_x, y - 3);
 
     if (hasIcon) {
-      p.shapeMode(p.CENTER);
+      p.shapeMode(p.CORNER);
       p.shape(icon, icon_x, icon_y, icon_size, icon_size);
     }
   }
 
   protected void setupIcon() {
-    icon_x = x - icon_space;
-    icon_y = y + icon_y_mod;
+    icon_x = x - w / 2;
+    icon_y = y - h / 3;
+  }
+
+  protected void setupText() {
+    txt_x = x - w / 6;
+    txt_y = y + h / 2;
   }
 }

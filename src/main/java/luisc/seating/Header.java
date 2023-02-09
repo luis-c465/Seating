@@ -1,33 +1,197 @@
 package luisc.seating;
 
+import luisc.lib.Btn;
 import luisc.lib.Obj;
 
 /**
- * Shows the score of both players and the current player turn
- * The currents players turn will be highlighted
- *
- * Also shows the names of both players and the pieces they are using
+ * Shows a information about the program
+ * and 6 buttons for sorting the list of students
+ * Also shows a hel button on how to use the program
  */
 public class Header extends Obj {
 
   public static final int safe = 10;
-  public static final int gap = 50;
+  public static final int margin_top = 10;
   public static final int h = 100;
-  public static final int h_c = 50;
+  public static final String title = "Seating Chart";
+  public static final String r_string = "Rows";
+  public static final String c_string = "Cols";
+  public static final int center = 700 / 2;
+  public static final int bts_begin_y = 125;
+  public static final int bts_begin_y_2 = bts_begin_y * 2 + 20;
+  public static final int x1 = 200;
+  public static final int x2 = 400;
+  public static final int x3 = 600;
 
-  public static final int score_x_l = App.cw - gap;
-  public static final int score_x_r = App.cw + gap;
+  public RowsAlphabetical rowsAlphabetical;
+  public RowsId rowsId;
+  public RowsDefault rowsDefault;
 
-  public static final int name_y = 30;
-
-  public static final int piece_x_l = gap;
-  public static final int piece_x_r = App.w - gap;
+  public ColsAlphabetical colsAlphabetical;
+  public ColsId colsId;
+  public ColsDefault colsDefault;
 
   @Override
-  protected void _setup() {}
+  protected void _setup() {
+    rowsAlphabetical = new RowsAlphabetical(m);
+    rowsId = new RowsId(m);
+    rowsDefault = new RowsDefault(m);
+
+    colsAlphabetical = new ColsAlphabetical(m);
+    colsId = new ColsId(m);
+    colsDefault = new ColsDefault(m);
+  }
 
   @Override
-  protected void _update() {}
+  protected void _update() {
+    p.textAlign(c.CENTER);
+    p.text(title, center, 55);
+
+    p.textAlign(c.CORNER);
+    p.textSize(30);
+    p.text(r_string, safe, bts_begin_y);
+    p.text(c_string, safe, bts_begin_y * 2 + safe);
+
+    rowsAlphabetical.update();
+    rowsId.update();
+    rowsDefault.update();
+
+    colsAlphabetical.update();
+    colsId.update();
+    colsDefault.update();
+  }
+
+  public class RowsAlphabetical extends Btn {
+
+    @Override
+    protected void _setup() {
+      x = x1;
+      y = bts_begin_y;
+
+      txt = "Sort by name";
+      icon = p.loadShape("sort-ascending-letters.svg");
+    }
+
+    @Override
+    protected void onClick() {
+      m.seats.rowsSortByName();
+    }
+
+    public RowsAlphabetical(App a) {
+      super(a);
+      setup();
+    }
+  }
+
+  public class RowsId extends Btn {
+
+    @Override
+    protected void _setup() {
+      x = x2;
+      y = bts_begin_y;
+
+      txt = "Sort by Id";
+      icon = p.loadShape("sort-ascending-numbers.svg");
+    }
+
+    @Override
+    protected void onClick() {
+      m.seats.rowsSortById();
+    }
+
+    public RowsId(App a) {
+      super(a);
+      setup();
+    }
+  }
+
+  public class RowsDefault extends Btn {
+
+    @Override
+    protected void _setup() {
+      x = x3;
+      y = bts_begin_y;
+
+      txt = "Sort by seat";
+      icon = p.loadShape("sort-ascending-2.svg");
+    }
+
+    @Override
+    protected void onClick() {
+      m.seats.rowsSortByDefault();
+    }
+
+    public RowsDefault(App a) {
+      super(a);
+      setup();
+    }
+  }
+
+  public class ColsAlphabetical extends Btn {
+
+    @Override
+    protected void _setup() {
+      x = x1;
+      y = bts_begin_y_2;
+
+      txt = "Sort by name";
+      icon = p.loadShape("sort-ascending-letters.svg");
+    }
+
+    @Override
+    protected void onClick() {
+      m.seats.colsSortByName();
+    }
+
+    public ColsAlphabetical(App a) {
+      super(a);
+      setup();
+    }
+  }
+
+  public class ColsId extends Btn {
+
+    @Override
+    protected void _setup() {
+      x = x2;
+      y = bts_begin_y_2;
+
+      txt = "Sort by Id";
+      icon = p.loadShape("sort-ascending-numbers.svg");
+    }
+
+    @Override
+    protected void onClick() {
+      m.seats.colsSortById();
+    }
+
+    public ColsId(App a) {
+      super(a);
+      setup();
+    }
+  }
+
+  public class ColsDefault extends Btn {
+
+    @Override
+    protected void _setup() {
+      x = x3;
+      y = bts_begin_y_2;
+
+      txt = "Sort by seat";
+      icon = p.loadShape("sort-ascending-2.svg");
+    }
+
+    @Override
+    protected void onClick() {
+      m.seats.colsSortByNormal();
+    }
+
+    public ColsDefault(App a) {
+      super(a);
+      setup();
+    }
+  }
 
   public Header(App app) {
     super(app);

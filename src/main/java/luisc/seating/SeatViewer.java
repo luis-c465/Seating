@@ -18,15 +18,29 @@ public class SeatViewer extends Clickable {
   public int row;
   public int col;
 
+  public int default_row;
+  public int default_col;
+
   @Override
   protected void _setup() {
     w = 110;
     h = 110;
 
-    x = margin_left + (w + gap) * col;
-    y = margin_top + (h + gap) * row;
+    canMove = true;
+    calc();
 
     cornerToCenter();
+  }
+
+  @Override
+  protected void updateCorners() {
+    calc();
+    super.updateCorners();
+  }
+
+  private void calc() {
+    x = margin_left + (w + gap) * col;
+    y = margin_top + (h + gap) * row;
   }
 
   @Override
@@ -86,6 +100,9 @@ public class SeatViewer extends Clickable {
     super(app);
     this.row = r;
     this.col = c;
+
+    this.default_row = r;
+    this.default_col = c;
 
     setup();
   }

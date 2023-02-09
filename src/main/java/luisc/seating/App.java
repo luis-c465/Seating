@@ -80,6 +80,7 @@ public final class App extends BaseApp {
 
     seats.update();
     sidebar.update();
+    header.update();
     // startUp.update();
     // if (!startUp.done) {
     //   return;

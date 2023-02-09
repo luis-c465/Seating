@@ -62,6 +62,8 @@ public class ClickableStudent extends Clickable {
     x = margin_left + (w + gap) * col;
     y = margin_top + (h + vert_gap) * row;
 
+    canMove = true;
+
     cornerToCenter();
   }
 

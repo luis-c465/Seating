@@ -12,7 +12,26 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
 
   private static final int ROWS = 5;
 
-  public static final Comparator<SeatViewer> defaultSorter = new Comparator<SeatViewer>() {
+  public void update() {
+    for (int r = 0; r < ROWS; r++) {
+      LinkedList<SeatViewer> seats = this.get(r);
+      for (int c = 0; c < COLS; c++) {
+        SeatViewer seat = seats.get(c);
+        seat.row = r;
+        seat.col = c;
+
+        seat.update();
+      }
+    }
+
+    for (LinkedList<SeatViewer> list : this) {
+      for (SeatViewer studentViewer : list) {
+        studentViewer.update();
+      }
+    }
+  }
+
+  public static final Comparator<SeatViewer> nullSorter = new Comparator<SeatViewer>() {
     public int compare(SeatViewer a, SeatViewer b) {
       if (a == null) {
         return -1;
@@ -26,16 +45,25 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
         return 1;
       }
 
-      return Integer.compare(a.col, b.col);
+      return 0;
+    }
+  };
+
+  public static final Comparator<SeatViewer> defaultSorter = new Comparator<SeatViewer>() {
+    public int compare(SeatViewer a, SeatViewer b) {
+      int temp = Integer.compare(a.default_col, b.default_col);
+      if (temp != 0) {
+        return temp;
+      }
+      return Integer.compare(a.default_row, b.default_row);
     }
   };
 
   public static final Comparator<SeatViewer> nameSorter = new Comparator<SeatViewer>() {
     public int compare(SeatViewer a, SeatViewer b) {
-      if (a == null) {
-        return -1;
-      } else if (b == null) {
-        return 1;
+      int tmp = nullSorter.compare(a, b);
+      if (tmp != 0) {
+        return tmp;
       }
 
       int first = a.student.firstName.compareTo(b.student.firstName);
@@ -50,10 +78,9 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
 
   public static final Comparator<SeatViewer> idSorter = new Comparator<SeatViewer>() {
     public int compare(SeatViewer a, SeatViewer b) {
-      if (a == null) {
-        return -1;
-      } else if (b == null) {
-        return 1;
+      int tmp = nullSorter.compare(a, b);
+      if (tmp != 0) {
+        return tmp;
       }
 
       return Integer.compare(a.student.id_i, b.student.id_i);
@@ -67,9 +94,14 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
   }
 
   public void rowsSortByName() {
-    for (List<SeatViewer> l : this) {
-      Collections.sort(l, nameSorter);
+    for (int i = 0; i < this.size(); i++) {
+      LinkedList<SeatViewer> ref = this.get(i);
+      Collections.sort(ref, nameSorter);
+      this.set(i, ref);
     }
+    // for (List<SeatViewer> l : this) {
+    //   Collections.sort(l, nameSorter);
+    // }
   }
 
   public void rowsSortById() {
@@ -89,6 +121,13 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
     int cols = this.get(0).size();
     for (int c = 0; c < cols; c++) {
       sortbyColumn(c, idSorter);
+    }
+  }
+
+  public void colsSortByNormal() {
+    int cols = this.get(0).size();
+    for (int c = 0; c < cols; c++) {
+      sortbyColumn(c, defaultSorter);
     }
   }
 
@@ -134,14 +173,6 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
       sb.append(e);
       if (!it.hasNext()) return sb.append(']').toString();
       sb.append(',').append('\n');
-    }
-  }
-
-  public void update() {
-    for (LinkedList<SeatViewer> list : this) {
-      for (SeatViewer studentViewer : list) {
-        studentViewer.update();
-      }
     }
   }
 }
