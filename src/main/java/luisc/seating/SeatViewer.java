@@ -12,6 +12,7 @@ public class SeatViewer extends Clickable {
   public static final int gap = 10;
   public static final int padding = 3;
   public static final int doublePadding = padding * 2;
+  public static final int radius = 10;
 
   public Student student;
   public int row;
@@ -31,7 +32,7 @@ public class SeatViewer extends Clickable {
   @Override
   protected void _update() {
     p.rectMode(c.CENTER);
-    p.rect(x, y, w, h);
+    p.rect(x, y, w, h, radius);
 
     p.fill(255);
     if (student != null) {
