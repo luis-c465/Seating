@@ -12,7 +12,7 @@ public class SeatViewer extends Clickable {
   public static final int showOverlayFor = 40;
 
   public static final int margin_top = 450;
-  public static final int margin_left = 65;
+  public static final int margin_left = 100;
   public static final int gap = 10;
   public static final int padding = 3;
   public static final int doublePadding = padding * 2;
@@ -32,7 +32,7 @@ public class SeatViewer extends Clickable {
 
   @Override
   protected void _setup() {
-    w = 110;
+    w = 105;
     h = 110;
 
     canMove = true;

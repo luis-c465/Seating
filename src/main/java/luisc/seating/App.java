@@ -43,6 +43,7 @@ public final class App extends BaseApp {
   public Sidebar sidebar = new Sidebar(this);
 
   public Seats seats = new Seats(this);
+  public SeatsViewer seatsViewer = new SeatsViewer(this);
   public LinkedList<Student> students = new LinkedList<Student>();
 
   // Transition classes
@@ -72,7 +73,7 @@ public final class App extends BaseApp {
 
     sidebar.setup();
 
-    seats.setup();
+    seatsViewer.setup();
     // Setup game classes
   }
 
@@ -81,7 +82,7 @@ public final class App extends BaseApp {
     background(bg);
     fill(255);
 
-    seats.update();
+    seatsViewer.update();
     sidebar.update();
     header.update();
     // startUp.update();
