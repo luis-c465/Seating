@@ -66,7 +66,7 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
         return tmp;
       }
 
-      int first = a.student.firstName.compareTo(b.student.firstName);
+      int first = a.student.lastName.compareTo(b.student.lastName);
 
       if (first != 0) {
         return first;

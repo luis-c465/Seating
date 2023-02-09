@@ -21,28 +21,22 @@ public class Student {
 
   @Override
   public String toString() {
-    return (
-      firstName + " " + lastName + " #" + id + " dob: " + dateParser.format(dob)
-    );
+    return (toNameString() + " #" + id + " dob: " + dateParser.format(dob));
   }
 
   public String toDisplayString() {
-    return (
-      firstName +
-      " " +
-      lastName +
-      " #" +
-      id +
-      "     dob: " +
-      dateParser.format(dob)
-    );
+    return toNameString() + " #" + id + "     dob: " + dateParser.format(dob);
+  }
+
+  public String toNameString() {
+    return lastName + ", " + firstName;
   }
 
   /**
    * @returns String containing the students first, last name, and id
    */
   public String toShortString() {
-    return firstName + " " + lastName + " #" + id;
+    return toNameString() + " #" + id;
   }
 
   public Student(PApplet p, String name, String id, String dob) {
