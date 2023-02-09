@@ -7,6 +7,10 @@ import luisc.lib.Clickable;
  */
 public class SeatViewer extends Clickable {
 
+  public static final int c_overlay = 0xff475569;
+  public static final int overlay_opacity = 100;
+  public static final int showOverlayFor = 40;
+
   public static final int margin_top = 450;
   public static final int margin_left = 65;
   public static final int gap = 10;
@@ -20,6 +24,11 @@ public class SeatViewer extends Clickable {
 
   public int default_row;
   public int default_col;
+
+  public int clicksCombo = 1;
+  public int time_since_click = 0;
+  public int overlayTimer = 0;
+  public static final int max_time_since_click = 20;
 
   @Override
   protected void _setup() {
@@ -60,10 +69,61 @@ public class SeatViewer extends Clickable {
         h - doublePadding
       );
     }
+
+    if (clicksCombo >= 2) {
+      if (overlayTimer < showOverlayFor) {
+        showDeleteOverlay();
+      } else {
+        clicksCombo = 1;
+        time_since_click = 0;
+        overlayTimer = 0;
+      }
+    }
+
+    if (time_since_click <= max_time_since_click) {
+      time_since_click++;
+    }
+  }
+
+  /**
+   * Should only be shown if the click combo is greater or equal to 1
+   */
+  protected void showDeleteOverlay() {
+    overlayTimer++;
+
+    p.rectMode(c.CENTER);
+    p.fill(c_overlay, overlay_opacity);
+    p.rect(x, y, w, h, radius);
+    // Then show the delete icon
+
+    p.shapeMode(c.CENTER);
+    p.shape(a.userMinus, x, y, 40, 40);
   }
 
   @Override
   protected void onClick() {
+    if (student != null) {
+      if (time_since_click < max_time_since_click) {
+        if (clicksCombo >= 2 && overlayTimer < showOverlayFor) {
+          student.alreadySeated = false;
+          this.student = null;
+          overlayTimer = 0;
+          clicksCombo = 1;
+          time_since_click = 0;
+
+          return;
+        }
+
+        clicksCombo++;
+      } else {
+        clicksCombo = 1;
+      }
+
+      time_since_click = 0;
+
+      return;
+    }
+
     // If there is no selected student or the sidebars student is already seated do not process the click
     if (
       m.sidebar.selectedStudent == null ||

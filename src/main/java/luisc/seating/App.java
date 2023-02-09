@@ -28,9 +28,6 @@ public final class App extends BaseApp {
   public long numDead = 0;
   public long numTicks = 0;
 
-  public Seats seats = new Seats(this);
-  public LinkedList<Student> students = new LinkedList<Student>();
-
   // Should be calculated at runtime
 
   // * Util classes
@@ -45,12 +42,16 @@ public final class App extends BaseApp {
   public Intro intro = new Intro(this);
   public Sidebar sidebar = new Sidebar(this);
 
+  public Seats seats = new Seats(this);
+  public LinkedList<Student> students = new LinkedList<Student>();
+
   // Transition classes
   public TransitionIn transIn = new TransitionIn(this);
   public TransitionOut transOut = new TransitionOut(this);
 
   @Override
   public void setup() {
+    frameRate(30);
     smooth();
     procSet();
 
@@ -70,6 +71,8 @@ public final class App extends BaseApp {
     startUp.setup();
 
     sidebar.setup();
+
+    seats.setup();
     // Setup game classes
   }
 

@@ -23,10 +23,12 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
         seat.update();
       }
     }
+  }
 
+  public void setup() {
     for (LinkedList<SeatViewer> list : this) {
       for (SeatViewer studentViewer : list) {
-        studentViewer.update();
+        studentViewer.setup();
       }
     }
   }
