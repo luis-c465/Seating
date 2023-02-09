@@ -74,6 +74,8 @@ public final class App extends BaseApp {
   public void draw() {
     background(bg);
     fill(255);
+
+    seats.update();
     // startUp.update();
     // if (!startUp.done) {
     //   return;

@@ -7,8 +7,8 @@ import luisc.lib.Clickable;
  */
 public class SeatViewer extends Clickable {
 
-  public static final int margin_top = 100;
-  public static final int margin_left = 50;
+  public static final int margin_top = 500;
+  public static final int margin_left = 25;
   public static final int gap = 20;
 
   public Student student;
@@ -17,11 +17,13 @@ public class SeatViewer extends Clickable {
 
   @Override
   protected void _setup() {
-    w = 75;
-    h = 75;
+    w = 100;
+    h = 100;
 
-    x = 50 + (w + gap) * col;
+    x = margin_left + (w + gap) * col;
     y = margin_top + (h + gap) * row;
+
+    cornerToCenter();
   }
 
   @Override
@@ -45,12 +47,16 @@ public class SeatViewer extends Clickable {
     this.row = r;
     this.col = c;
     this.student = student;
+
+    _setup();
   }
 
   public SeatViewer(App app, int r, int c) {
     super(app);
     this.row = r;
     this.col = c;
+
+    _setup();
   }
 
   public SeatViewer(App app) {

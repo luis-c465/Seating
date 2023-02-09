@@ -8,9 +8,9 @@ import java.util.List;
 
 public class Seats extends LinkedList<LinkedList<SeatViewer>> {
 
-  private static final int COLS = 10;
+  private static final int COLS = 6;
 
-  private static final int ROWS = 3;
+  private static final int ROWS = 5;
 
   public static final Comparator<SeatViewer> defaultSorter = new Comparator<SeatViewer>() {
     public int compare(SeatViewer a, SeatViewer b) {
@@ -134,6 +134,14 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
       sb.append(e);
       if (!it.hasNext()) return sb.append(']').toString();
       sb.append(',').append('\n');
+    }
+  }
+
+  public void update() {
+    for (LinkedList<SeatViewer> list : this) {
+      for (SeatViewer studentViewer : list) {
+        studentViewer.update();
+      }
     }
   }
 }
