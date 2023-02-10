@@ -66,7 +66,7 @@ public class Student {
   }
 
   public static final String randId() {
-    return "0" + rand.nextInt(999_999);
+    return "0" + (rand.nextInt(999_999 - 100_000 + 1) + 100_000);
   }
 
   public static final LocalDate randDate() {

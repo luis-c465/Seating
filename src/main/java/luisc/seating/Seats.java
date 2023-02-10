@@ -16,16 +16,20 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
 
   public static final Comparator<SeatViewer> nullSorter = new Comparator<SeatViewer>() {
     public int compare(SeatViewer a, SeatViewer b) {
-      if (a == null) {
-        return -1;
-      } else if (b == null) {
+      if (a == null && b == null) {
         return 1;
+      } else if (a == null) {
+        return 1;
+      } else if (b == null) {
+        return -1;
       }
 
-      if (a.student == null) {
-        return -1;
-      } else if (b.student == null) {
+      if (a.student == null && b.student == null) {
         return 1;
+      } else if (a.student == null) {
+        return 1;
+      } else if (b.student == null) {
+        return -1;
       }
 
       return 0;
@@ -49,13 +53,13 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
         return tmp;
       }
 
-      int first = a.student.lastName.compareTo(b.student.lastName);
+      int last = a.student.lastName.compareTo(b.student.lastName);
 
-      if (first != 0) {
-        return first;
+      if (last != 0) {
+        return last;
       }
 
-      return a.student.lastName.compareTo(b.student.lastName);
+      return a.student.firstName.compareTo(b.student.firstName);
     }
   };
 

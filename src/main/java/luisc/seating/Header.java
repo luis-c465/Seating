@@ -47,10 +47,14 @@ public class Header extends Obj {
     p.textAlign(c.CENTER);
     p.text(title, center, 55);
 
+    p.shapeMode(c.CORNER);
     p.textAlign(c.CORNER);
     p.textSize(30);
     p.text(r_string, safe, bts_begin_y);
     p.text(c_string, safe, bts_begin_y * 2 + safe);
+
+    p.shape(a.rows, safe, bts_begin_y + 20, 40, 40);
+    p.shape(a.columns, safe, bts_begin_y * 2 + 20 + safe, 40, 40);
 
     rowsAlphabetical.update();
     rowsId.update();

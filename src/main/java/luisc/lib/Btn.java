@@ -10,7 +10,7 @@ public abstract class Btn extends Clickable {
   protected String txt = "Click me!";
   protected int txt_size = 15;
   protected int c = 0xfffac83c;
-  protected int txt_c = 0xffffffff;
+  protected int txt_c = 0xff000000;
   protected int radius = 25;
 
   protected boolean hasIcon = true;

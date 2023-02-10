@@ -33,12 +33,17 @@ public class Assets {
 
   public PShape skull;
   public PShape userMinus;
+  public PShape rows;
+  public PShape columns;
 
   public PImage rating;
 
   private void loadShapes() {
     skull = p.loadShape("skull.svg");
     userMinus = p.loadShape("user-minus.svg");
+
+    rows = p.loadShape("rows.svg");
+    columns = p.loadShape("columns.svg");
   }
 
   public PImage enter;
