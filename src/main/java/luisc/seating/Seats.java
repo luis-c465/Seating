@@ -1,5 +1,6 @@
 package luisc.seating;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -83,11 +84,14 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
   }
 
   public void rowsSortByName() {
-    for (int i = 0; i < this.size(); i++) {
-      LinkedList<SeatViewer> ref = this.get(i);
-      Collections.sort(ref, nameSorter);
-      this.set(i, ref);
+    for (List<SeatViewer> l : this) {
+      Collections.sort(l, nameSorter);
     }
+    // for (int r = 0; r < ROWS; r++) {
+    //   LinkedList<SeatViewer> ref = this.get(r);
+    //   Collections.sort(ref, nameSorter);
+    //   this.set(r, ref);
+    // }
 
     sorted = true;
   }
@@ -100,30 +104,33 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
   }
 
   public void colsSortByName() {
-    int cols = this.get(0).size();
-    for (int c = 0; c < cols; c++) {
+    for (int c = 0; c < COLS; c++) {
       sortbyColumn(c, nameSorter);
     }
     sorted = true;
   }
 
   public void colsSortById() {
-    int cols = this.get(0).size();
-    for (int c = 0; c < cols; c++) {
+    for (int c = 0; c < COLS; c++) {
       sortbyColumn(c, idSorter);
     }
     sorted = true;
   }
 
   public void colsSortByDefault() {
-    int cols = this.get(0).size();
-    for (int c = 0; c < cols; c++) {
+    for (int c = 0; c < COLS; c++) {
       sortbyColumn(c, defaultSorter);
     }
     sorted = true;
   }
 
   public void sortByNormal() {
+    // for (LinkedList<SeatViewer> seats : this) {
+    //   for (SeatViewer seat : seats) {
+    //     seat.row = seat.default_row;
+    //     seat.col = seat.default_col;
+    //   }
+    // }
     rowsSortByDefault();
     colsSortByDefault();
 
@@ -131,36 +138,16 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
   }
 
   public void sortbyColumn(int col, Comparator<SeatViewer> c) {
-    // Using built-in sort function Arrays.sort
-    Collections.sort(
-      this,
-      new Comparator<List<SeatViewer>>() {
-        @Override
-        // Compare values according to columns
-        public int compare(
-          final List<SeatViewer> l1,
-          final List<SeatViewer> l2
-        ) {
-          return c.compare(l1.get(col), l2.get(col));
-        }
-      }
-    );
+    List<SeatViewer> column = new ArrayList<>();
+    for (List<SeatViewer> row : this) {
+      column.add(row.get(col));
+    }
+    Collections.sort(column, c);
 
-    // Sometimes the first element of the collum wont be correctly sorted
-    // so instead of fixing it I am just sorting the list twice
-    Collections.sort(
-      this,
-      new Comparator<List<SeatViewer>>() {
-        @Override
-        // Compare values according to columns
-        public int compare(
-          final List<SeatViewer> l1,
-          final List<SeatViewer> l2
-        ) {
-          return c.compare(l1.get(col), l2.get(col));
-        }
-      }
-    ); // End of function call sort().
+    int index = 0;
+    for (List<SeatViewer> row : this) {
+      row.set(col, column.get(index++));
+    }
   }
 
   public Seats(App p) {
