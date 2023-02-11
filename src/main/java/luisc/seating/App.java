@@ -82,14 +82,13 @@ public final class App extends BaseApp {
     background(bg);
     fill(255);
 
+    intro.update();
+    if (doingIntro) {
+      return;
+    }
+
     seatsViewer.update();
     sidebar.update();
     header.update();
-    // startUp.update();
-    // if (!startUp.done) {
-    //   return;
-    // }
-
-    // header.update();
   }
 }

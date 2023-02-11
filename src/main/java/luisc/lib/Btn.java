@@ -57,21 +57,21 @@ public abstract class Btn extends Clickable {
     p.textAlign(p.LEFT, p.CENTER);
     p.fill(txt_c);
     p.textSize(txt_size);
-    p.text(txt, txt_x, y - 3);
+    p.text(txt, txt_x, txt_y);
 
     if (hasIcon) {
-      p.shapeMode(p.CORNER);
+      p.shapeMode(p.CENTER);
       p.shape(icon, icon_x, icon_y, icon_size, icon_size);
     }
   }
 
   protected void setupIcon() {
-    icon_x = x - w / 2;
-    icon_y = y - h / 3;
+    icon_x = x - icon_size;
+    icon_y = y;
   }
 
   protected void setupText() {
     txt_x = x - w / 6;
-    txt_y = y + h / 2;
+    txt_y = y - 3;
   }
 }

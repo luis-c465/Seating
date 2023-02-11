@@ -70,7 +70,7 @@ public class Assets {
 
   private void loadMisc() {
     intro = p.loadImage("intro.png");
-    // tutorial = p.loadImage("tutorial.png");
+    tutorial = p.loadImage("instructions.png");
   }
 
   /**

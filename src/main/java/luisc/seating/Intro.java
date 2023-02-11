@@ -14,7 +14,7 @@ public class Intro extends Transitionable {
   BackBtn backBtn;
 
   protected void _setup() {
-    slides = new PImage[] { a.intro };
+    slides = new PImage[] { a.intro, a.tutorial };
     maxSlide = slides.length - 1;
 
     contBtn = new ContBtn(m);
@@ -58,13 +58,11 @@ public class Intro extends Transitionable {
       x = App.w - 10 - w;
       y = App.h - 10;
 
-      txt_size = 15;
-      icon_size = 20;
+      txt_size = 20;
+      icon_size = 30;
 
       txt = cont;
       icon = p.loadShape("continue.svg");
-      icon_space = 40;
-      txt_space = 10;
 
       cornerToCenter();
     }
@@ -97,12 +95,10 @@ public class Intro extends Transitionable {
       y = App.h - 10;
 
       txt_size = 20;
-      icon_size = 20;
+      icon_size = 30;
 
       txt = "Back";
       icon = p.loadShape("back.svg");
-      icon_space = 35;
-      txt_space = 0;
 
       cornerToCenter();
     }
