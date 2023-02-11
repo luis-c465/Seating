@@ -23,6 +23,8 @@ public class Header extends Obj {
   public static final int x2 = 400;
   public static final int x3 = 600;
 
+  public HelpBtn helpBtn;
+
   public RowsAlphabetical rowsAlphabetical;
   public RowsId rowsId;
 
@@ -33,6 +35,8 @@ public class Header extends Obj {
 
   @Override
   protected void _setup() {
+    helpBtn = new HelpBtn(m);
+
     rowsAlphabetical = new RowsAlphabetical(m);
     rowsId = new RowsId(m);
 
@@ -44,9 +48,14 @@ public class Header extends Obj {
 
   @Override
   protected void _update() {
-    p.textAlign(c.CENTER);
-    p.text(title, center, 55);
+    showHeader();
 
+    showRowsAndColsLabel();
+
+    updateBtns();
+  }
+
+  private void showRowsAndColsLabel() {
     p.shapeMode(c.CORNER);
     p.textAlign(c.CORNER);
     p.textSize(30);
@@ -55,6 +64,15 @@ public class Header extends Obj {
 
     p.shape(a.rows, safe, bts_begin_y + 20, 40, 40);
     p.shape(a.columns, safe, bts_begin_y * 2 + 20 + safe, 40, 40);
+  }
+
+  private void showHeader() {
+    p.textAlign(c.CENTER);
+    p.text(title, center, 55);
+  }
+
+  private void updateBtns() {
+    helpBtn.update();
 
     rowsAlphabetical.update();
     rowsId.update();

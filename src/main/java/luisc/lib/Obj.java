@@ -13,7 +13,7 @@ public abstract class Obj {
   protected Assets a;
   protected App m;
   protected PApplet p;
-  protected boolean shouldUpdate = true;
+  public boolean shouldUpdate = true;
 
   public Obj(App app) {
     this.a = app.a;

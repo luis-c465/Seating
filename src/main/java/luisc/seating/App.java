@@ -41,6 +41,7 @@ public final class App extends BaseApp {
   public StartUp startUp = new StartUp(this);
   public Intro intro = new Intro(this);
   public Sidebar sidebar = new Sidebar(this);
+  public HelpModal helpModal = new HelpModal(this);
 
   public Seats seats = new Seats(this);
   public SeatsViewer seatsViewer = new SeatsViewer(this);
@@ -74,6 +75,8 @@ public final class App extends BaseApp {
     sidebar.setup();
 
     seatsViewer.setup();
+
+    helpModal.setup();
     // Setup game classes
   }
 
@@ -90,5 +93,11 @@ public final class App extends BaseApp {
     seatsViewer.update();
     sidebar.update();
     header.update();
+    helpModal.update();
+  }
+
+  @Override
+  public void mouseClicked() {
+    helpModal.mouseClicked();
   }
 }
