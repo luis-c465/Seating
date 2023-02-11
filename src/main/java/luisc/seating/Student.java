@@ -17,6 +17,7 @@ public class Student {
   public String id;
   public int id_i;
   public LocalDate dob;
+  private String dob_str_cache;
   public boolean alreadySeated;
 
   @Override
@@ -30,6 +31,18 @@ public class Student {
 
   public String toNameString() {
     return lastName + ", " + firstName;
+  }
+
+  public String toIdString() {
+    return "#" + id;
+  }
+
+  public String getDOBString() {
+    if (dob_str_cache == null) {
+      dob_str_cache = dateParser.format(dob);
+    }
+
+    return dob_str_cache;
   }
 
   /**

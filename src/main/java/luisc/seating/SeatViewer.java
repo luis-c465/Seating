@@ -18,6 +18,14 @@ public class SeatViewer extends Clickable {
   public static final int doublePadding = padding * 2;
   public static final int radius = 10;
 
+  public static final int padding_gap = 20;
+  public int name_y = -1;
+  public int id_y = -1;
+  public int dob_y = -1;
+  public int str_x = -1;
+  public int str_x_end = -1;
+  public static final int str_h_max = 20;
+
   public Student student;
   public int row;
   public int col;
@@ -30,10 +38,14 @@ public class SeatViewer extends Clickable {
   public int overlayTimer = 0;
   public static final int max_time_since_click = 20;
 
+  public int max_txt_w = -1;
+
   @Override
   protected void _setup() {
     w = 105;
     h = 110;
+
+    max_txt_w = w - doublePadding;
 
     canMove = true;
     calc();
@@ -50,26 +62,60 @@ public class SeatViewer extends Clickable {
   private void calc() {
     x = margin_left + (w + gap) * col;
     y = margin_top + (h + gap) * row;
+
+    name_y = y - h / 2 + gap;
+    id_y = name_y + str_h_max * 2 + padding_gap;
+    dob_y = id_y + padding_gap;
+    str_x = x - w / 2 + padding;
+    str_x_end = w - padding;
   }
 
   @Override
   protected void _update() {
+    display();
+
+    checkClicksCombo();
+  }
+
+  private void display() {
     p.rectMode(c.CENTER);
     p.rect(x, y, w, h, radius);
 
-    p.fill(255);
+    p.rectMode(c.CORNER);
+    p.fill(0);
+    p.textSize(13);
+    p.textAlign(c.LEFT, c.TOP);
     if (student != null) {
-      p.fill(0);
-      p.textSize(13);
-      p.text(
-        student.toDisplayString(),
-        x + padding,
-        y + padding,
-        w - doublePadding,
-        h - doublePadding
-      );
-    }
+      // p.text(
+      //   student.toDisplayString(),
+      //   x + padding,
+      //   y + padding,
+      //   w - doublePadding,
+      //   h - doublePadding
+      // );
 
+      showName();
+      showId();
+      showDOB();
+    }
+  }
+
+  private void showName() {
+    p.textSize(12);
+    p.text(student.toNameString(), str_x, name_y, str_x_end, str_h_max * 3);
+  }
+
+  private void showId() {
+    p.textSize(14);
+    p.text(student.toIdString(), str_x, id_y, str_x_end, str_h_max);
+  }
+
+  private void showDOB() {
+    p.textSize(14);
+    p.text(student.getDOBString(), str_x, dob_y, str_x_end, str_h_max);
+  }
+
+  private void checkClicksCombo() {
     if (clicksCombo >= 2) {
       if (overlayTimer < showOverlayFor) {
         showDeleteOverlay();
