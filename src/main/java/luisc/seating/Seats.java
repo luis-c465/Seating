@@ -144,6 +144,22 @@ public class Seats extends LinkedList<LinkedList<SeatViewer>> {
           return c.compare(l1.get(col), l2.get(col));
         }
       }
+    );
+
+    // Sometimes the first element of the collum wont be correctly sorted
+    // so instead of fixing it I am just sorting the list twice
+    Collections.sort(
+      this,
+      new Comparator<List<SeatViewer>>() {
+        @Override
+        // Compare values according to columns
+        public int compare(
+          final List<SeatViewer> l1,
+          final List<SeatViewer> l2
+        ) {
+          return c.compare(l1.get(col), l2.get(col));
+        }
+      }
     ); // End of function call sort().
   }
 
