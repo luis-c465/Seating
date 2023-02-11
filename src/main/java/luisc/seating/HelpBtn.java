@@ -16,7 +16,7 @@ public class HelpBtn extends Btn {
 
   @Override
   protected void onClick() {
-    p.println("Show the help modal here!");
+    // p.println("Show the help modal here!");
     m.helpModal.beginShowing = true;
   }
 

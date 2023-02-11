@@ -63,9 +63,9 @@ public final class App extends BaseApp {
 
     // Initialize box2d physics and create the world
     StudentLoader.load(this, students);
-    println(students);
+    // println(students);
 
-    println(seats);
+    // println(seats);
 
     // SETUP CLASSES
     header.setup();
