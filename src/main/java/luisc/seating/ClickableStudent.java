@@ -38,7 +38,7 @@ public class ClickableStudent extends Clickable {
 
     p.fill(255);
     p.textMode(c.CENTER);
-    p.textSize(14);
+    p.textSize(13);
     p.fill(0);
     p.text(
       student.toShortString(),
